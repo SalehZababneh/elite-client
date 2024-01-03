@@ -1,4 +1,5 @@
 import Navbar from "./Navbar";
+// import REACT_APP_API_URL from "./.env.production"
 
 import ProductDetails from "./Pages/ProductDetails";
 import Checkout from "./Pages/Checkout";
@@ -16,11 +17,12 @@ function App() {
   // const addToCart = (product) => {
   //   setCartItems([...cartItems, product]);
   // };
+  // const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/getAllProducts');
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/getAllProducts`);
         if (response.ok) {
           const data = await response.json();
           setProducts(data.products);
@@ -36,13 +38,11 @@ function App() {
   
   }, []);
 console.log(products)
-// console.log(products.products.id)
-
   return (
     <>
     
       {/* <PageNav cartItems={cartItems}/> */}
-      <BrowserRouter>
+      <BrowserRouter basename='/' >
         <Routes>
            <Route path="/" element={<Home products={products} />} />
            <Route path="product-details/:productId" element={<ProductDetails />} />

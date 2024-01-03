@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PageNav from "../Components/PageNav";
 import "./checkout.css";
+// import REACT_APP_API_URL from "../.env.production"
+// import REACT_APP_API_URL from "../.env"
 import Product from "../assets/Photos/Product.jpg";
 const Checkout = () => {
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
   const [customerName, setcustomerName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [state, setstate] = useState("دمشق");
@@ -79,7 +83,7 @@ const Checkout = () => {
   const checkCodeExists = async () => {
     try {
       console.log("x");
-      const response = await fetch("http://127.0.0.1:8000/api/checkCode", {
+      const response = await fetch(`${REACT_APP_API_URL}/checkCode`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -155,7 +159,7 @@ const Checkout = () => {
     console.log(checkoutData);
     setLoading(true);
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/createOrder", {
+      const response = await fetch("http://elitesportswears/createOrder", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
